@@ -1,0 +1,16 @@
+{
+    "id": 1,
+    "research_type": "Company",
+    "name": "Tesla",
+    "website_url": "https://tesla.com",
+    "country": "USA",
+    "industry": "Automotive",
+    "research_goal": "Evaluate Tesla as a potential supplier",
+    "summary": "Tesla was analyzed as a Company. The report focuses on: Evaluate Tesla as a potential supplier.",
+    "products_or_services": "[\"Main offering related to Automotive\", \"Business operations and market positioning\"]",
+    "opportunities": "[\"Potential partnership opportunity\", \"Possible market expansion\", \"Further supplier/client evaluation recommended\"]",
+    "risks_or_missing_information": "[\"Limited verified public data\", \"Financial and legal information not fully validated\"]",
+    "suggested_next_actions": "[\"Verify company registration\", \"Check reviews and references\", \"Contact the company directly\", \"Compare with competitors\"]",
+    "confidence_score": 74,
+    "created_at": "2026-05-25 09:37:42.067188+02:00"
+}
