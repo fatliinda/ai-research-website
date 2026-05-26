@@ -33,18 +33,18 @@ function ReportTable({ reports, search, setSearch }) {
           <tbody>
             {reports.map((report) => (
               <tr key={report.id}>
-                <td className="name-cell">{report.name}</td>
+                <td data-label="Name" className="name-cell">{report.name}</td>
 
-                <td>
+                <td data-label="Research Type">
                   <span className={`badge ${report.research_type?.toLowerCase()}`}>
                     {report.research_type}
                   </span>
                 </td>
 
-                <td>{report.country || "-"}</td>
-                <td>{report.industry || "-"}</td>
+                <td data-label="Country">{report.country || "-"}</td>
+                <td data-label="Industry">{report.industry || "-"}</td>
 
-                <td>
+                <td data-label="Confidence">
                   <div className="confidence">
                     <strong>{report.confidence_score}</strong>/100
 
@@ -54,9 +54,9 @@ function ReportTable({ reports, search, setSearch }) {
                   </div>
                 </td>
 
-                <td>{new Date(report.created_at).toLocaleString()}</td>
+                <td data-label="Created">{new Date(report.created_at).toLocaleString()}</td>
 
-                <td>
+                <td data-label="Actions">
                   <Link className="details-btn" to={`/reports/${report.id}`}>
                     View Details
                   </Link>

@@ -11,4 +11,146 @@
   .filters-card {
     grid-template-columns: 1fr;
   }
+  @media (max-width: 900px) {
+  .dashboard-layout {
+    display: block;
+  }
+
+  .mobile-menu-btn {
+    display: inline-flex;
+    position: fixed;
+    top: 18px;
+    left: 18px;
+    z-index: 1200;
+
+    width: 46px;
+    height: 46px;
+    align-items: center;
+    justify-content: center;
+
+    border: none;
+    border-radius: 14px;
+    background: #070b33;
+    color: white;
+    font-size: 24px;
+    cursor: pointer;
+
+    box-shadow: 0 10px 24px rgba(15, 23, 42, 0.25);
+  }
+
+  .sidebar {
+    position: fixed;
+    inset: 0 auto 0 0;
+    width: 280px;
+    z-index: 1300;
+
+    transform: translateX(-100%);
+    transition: transform 0.25s ease;
+  }
+
+  .sidebar.sidebar-open {
+    transform: translateX(0);
+  }
+
+  .sidebar-close {
+    display: grid;
+    place-items: center;
+
+    position: absolute;
+    top: 16px;
+    right: 16px;
+
+    width: 36px;
+    height: 36px;
+
+    border: none;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.12);
+    color: white;
+    font-size: 28px;
+    cursor: pointer;
+  }
+
+  .sidebar-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 1250;
+    background: rgba(15, 23, 42, 0.45);
+    backdrop-filter: blur(2px);
+  }
+
+  .dashboard-main {
+    padding: 86px 18px 28px;
+  }
+
+  .dashboard-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  .dashboard-header h1 {
+    font-size: 28px;
+  }
+
+  .dashboard-header .primary-btn {
+    width: 100%;
+    justify-content: center;
+    text-align: center;
+  }
+}
+@media (max-width: 760px) {
+  .table-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 14px;
+  }
+
+  .search-input {
+    max-width: 100%;
+  }
+
+  table,
+  thead,
+  tbody,
+  th,
+  td,
+  tr {
+    display: block;
+  }
+
+  thead {
+    display: none;
+  }
+
+  tr {
+    background: white;
+    border: 1px solid #e5e7eb;
+    border-radius: 16px;
+    margin: 14px;
+    padding: 14px;
+    box-shadow: 0 8px 20px rgba(15, 23, 42, 0.05);
+  }
+
+  td {
+    border: none;
+    padding: 10px 0;
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    align-items: center;
+  }
+
+  td::before {
+    content: attr(data-label);
+    font-weight: 800;
+    color: #64748b;
+    font-size: 13px;
+  }
+
+  .table-actions {
+    justify-content: flex-end;
+  }
+}
+  
 }
