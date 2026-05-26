@@ -1,6 +1,7 @@
-from pydantic import BaseModel, Field
-from typing import Optional, Literal, List
 from datetime import datetime
+from typing import List, Optional, Literal
+
+from pydantic import BaseModel, Field
 
 
 class ResearchReportCreate(BaseModel):
@@ -16,7 +17,19 @@ class ResearchReportCreate(BaseModel):
     website_url: Optional[str] = Field(None, example="https://tesla.com")
     country: Optional[str] = Field(None, example="USA")
     industry: Optional[str] = Field(None, example="Automotive")
-    research_goal: str = Field(..., example="Evaluate Tesla as a potential supplier")
+    research_goal: str = Field(
+        ...,
+        example="Evaluate Tesla as a potential supplier"
+    )
+
+
+class AIReportResult(BaseModel):
+    summary: str
+    products_or_services: List[str]
+    opportunities: List[str]
+    risks_or_missing_information: List[str]
+    suggested_next_actions: List[str]
+    confidence_score: int = Field(ge=0, le=100)
 
 
 class ResearchReportResponse(BaseModel):
