@@ -86,10 +86,20 @@ internal-ai-research-agent/
 ├── frontend/
 │   ├── src/
 │   │   ├── api/
+|   |          └── report.js
 │   │   ├── components/
+|   |            └── Navbar.jsx
+|   |            └── ReportFilters.jsx
+|   |            └── ReportForm.jsx
+|   |            └── ReportTable.jsx
+|   |            └── StateCards.jsx
 │   │   ├── pages/
-│   │   ├── styles/
+|   |               └── Dashboard.jsx
+|   |              └── GenerateReport.jsx
+|   |              └── ReportDetails.jsx
+│   │   ├── App.css
 │   │   ├── App.jsx
+│   │   ├── index.css
 │   │   └── main.jsx
 │   │
 │   ├── package.json
