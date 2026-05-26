@@ -1,6 +1,8 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 function Navbar() {
+  const location = useLocation();
+
   return (
     <aside className="sidebar">
       <div className="logo">
@@ -12,9 +14,23 @@ function Navbar() {
       </div>
 
       <nav>
-        <Link className="nav-link active" to="/">Dashboard</Link>
-        <Link className="nav-link" to="/generate">Generate Report</Link>
+        <Link
+          className={`nav-link ${location.pathname === "/" ? "active" : ""}`}
+          to="/"
+        >
+          Dashboard
+        </Link>
+
+        <Link
+          className={`nav-link ${
+            location.pathname === "/generate" ? "active" : ""
+          }`}
+          to="/generate"
+        >
+          Generate Report
+        </Link>
       </nav>
+
     </aside>
   );
 }
