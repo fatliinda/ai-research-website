@@ -53,11 +53,19 @@ This project focuses on backend architecture, AI integration, database persisten
 | Database | PostgreSQL |
 | ORM | SQLAlchemy |
 | Validation | Pydantic |
-| AI Integration | OpenRouter |
+| AI Integration | OpenAI |
 | HTTP Client | Axios |
 | Routing | React Router DOM |
 | API Server | Uvicorn |
 | Environment Variables | python-dotenv |
+
+---
+
+# Database Choice
+
+This project uses PostgreSQL as the primary database.
+
+PostgreSQL was chosen because it is reliable, scalable, production-ready, and integrates well with SQLAlchemy ORM. It also supports structured and JSON-based data storage, making it suitable for storing AI-generated research reports and future analytics features.
 
 ---
 
@@ -81,25 +89,35 @@ internal-ai-research-agent/
 │   ├── output/
 │   ├── .env.example
 │   ├── requirements.txt
-│   └── .gitignore
+│   
 │
 ├── frontend/
 │   ├── src/
 │   │   ├── api/
-|   |          └── report.js
+│   │   │   └── reports.js
+│   │   │
 │   │   ├── components/
-|   |            └── Navbar.jsx
-|   |            └── ReportFilters.jsx
-|   |            └── ReportForm.jsx
-|   |            └── ReportTable.jsx
-|   |            └── StateCards.jsx
+│   │   │   ├── Navbar.jsx
+│   │   │   ├── ReportFilters.jsx
+│   │   │   ├── ReportForm.jsx
+│   │   │   ├── ReportTable.jsx
+│   │   │   └── StateCards.jsx
+│   │   │
 │   │   ├── pages/
-|   |               └── Dashboard.jsx
-|   |              └── GenerateReport.jsx
-|   |              └── ReportDetails.jsx
-│   │   ├── App.css
+│   │   │   ├── Dashboard.jsx
+│   │   │   ├── GenerateReport.jsx
+│   │   │   └── ReportDetails.jsx
+│   │   │
+│   │   ├── styles/
+│   │   │   ├── global.css
+│   │   │   ├── layout.css
+│   │   │   ├── dashboard.css
+│   │   │   ├── table.css
+│   │   │   ├── buttons.css
+│   │   │   ├── form.css
+│   │   │   └── responsive.css
+│   │   │
 │   │   ├── App.jsx
-│   │   ├── index.css
 │   │   └── main.jsx
 │   │
 │   ├── package.json
@@ -149,12 +167,26 @@ Example:
 
 ```env
 DATABASE_URL=postgresql://postgres:password@localhost:5432/research_agent
-OPENROUTER_API_KEY=your_api_key_here
+OPENAI_API_KEY=your_api_key_here
 ```
 
 ---
 
-## 4. PostgreSQL Setup
+# Database Configuration
+
+The database connection is configured using the `DATABASE_URL` environment variable.
+
+Example:
+
+```env
+DATABASE_URL=postgresql://postgres:password@localhost:5432/research_agent
+```
+
+The backend automatically connects to PostgreSQL through SQLAlchemy.
+
+---
+
+# PostgreSQL Setup
 
 Create database:
 
@@ -164,7 +196,21 @@ CREATE DATABASE research_agent;
 
 ---
 
-## 5. Run Backend
+# Create Tables
+
+Tables are automatically created when the backend starts.
+
+This is handled by SQLAlchemy:
+
+```python
+Base.metadata.create_all(bind=engine)
+```
+
+No migration tool is currently implemented in this prototype.
+
+---
+
+# Run Backend
 
 ```bash
 uvicorn app.main:app --reload
@@ -212,6 +258,54 @@ Frontend URL:
 
 ```txt
 http://localhost:5173
+```
+
+---
+
+# Generate a Report
+
+Reports can be generated in two ways.
+
+## Swagger API
+
+Open:
+
+```txt
+http://127.0.0.1:8000/docs
+```
+
+Use:
+
+```http
+POST /api/reports/generate
+```
+
+## Frontend Dashboard
+
+Open:
+
+```txt
+http://localhost:5173/generate
+```
+
+Fill the form and submit to generate a report.
+
+---
+
+# View Report History
+
+Generated reports are stored in PostgreSQL and displayed in the dashboard.
+
+Frontend dashboard:
+
+```txt
+http://localhost:5173
+```
+
+Backend endpoint:
+
+```http
+GET /api/reports
 ```
 
 ---
@@ -267,14 +361,17 @@ The dashboard includes:
   - country
   - industry/category
   - confidence score
-- Report table with:
-  - name
-  - type
-  - country
-  - industry
-  - confidence score
-  - created date
-  - details button
+
+Report table includes:
+
+- Name
+- Research type
+- Country
+- Industry/category
+- Confidence score
+- Created date
+- View details button
+- JSON export button
 
 ---
 
@@ -293,9 +390,10 @@ The backend then:
 
 1. Creates structured AI prompt
 2. Sends request to AI model
-3. Parses structured JSON response
-4. Saves report to PostgreSQL
-5. Returns data to frontend dashboard
+3. Parses AI response into JSON
+4. Validates response using Pydantic schemas
+5. Saves report to PostgreSQL
+6. Returns structured data to frontend dashboard
 
 ---
 
@@ -310,6 +408,8 @@ Validation includes:
 - confidence score limits
 - type validation
 - response schema validation
+
+The AI response is also validated before saving to the database.
 
 ---
 
@@ -338,6 +438,8 @@ output/research_report_001.json
 ✅ Report persistence working
 ✅ Swagger API testing completed
 ✅ JSON export completed
+✅ Report details page completed
+✅ Component-based frontend structure completed
 ```
 
 ---
@@ -364,6 +466,7 @@ output/research_report_001.json
 - PDF export not implemented yet
 - Website scraping not implemented yet
 - No background task queue
+- No migration system implemented yet
 
 ---
 
