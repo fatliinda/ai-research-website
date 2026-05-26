@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, Text, DateTime
+from sqlalchemy import Column, Integer, String, Text, DateTime, CheckConstraint, JSON
 from sqlalchemy.sql import func
 from app.database import Base
 
@@ -15,10 +15,10 @@ class ResearchReport(Base):
     research_goal = Column(Text, nullable=False)
 
     summary = Column(Text, nullable=True)
-    products_or_services = Column(Text, nullable=True)
-    opportunities = Column(Text, nullable=True)
-    risks_or_missing_information = Column(Text, nullable=True)
-    suggested_next_actions = Column(Text, nullable=True)
+    products_or_services = Column(JSON, nullable=True)
+    opportunities = Column(JSON, nullable=True)
+    risks_or_missing_information = Column(JSON, nullable=True)
+    suggested_next_actions = Column(JSON, nullable=True)
 
     confidence_score = Column(Integer, nullable=True)
     created_at = Column(DateTime(timezone=True), server_default=func.now())

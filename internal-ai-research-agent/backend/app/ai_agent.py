@@ -1,32 +1,62 @@
+import os
 import json
-import random
+
+from dotenv import load_dotenv
+from openai import OpenAI
+
+load_dotenv()
+api_key = os.getenv("OPENROUTER_API_KEY")
+
+if not api_key:
+    raise ValueError("OPENROUTER_API_KEY is missing from .env file.")
+
+client = OpenAI(
+    base_url="https://openrouter.ai/api/v1",
+    api_key=os.getenv("OPENROUTER_API_KEY")
+)
 
 
 def generate_ai_report(data):
-    
 
-    report = {
-        "summary": f"{data.name} was analyzed as a {data.research_type}. The report focuses on: {data.research_goal}.",
-        "products_or_services": [
-            f"Main offering related to {data.industry or 'the provided business area'}",
-            "Business operations and market positioning"
-        ],
-        "opportunities": [
-            "Potential partnership opportunity",
-            "Possible market expansion",
-            "Further supplier/client evaluation recommended"
-        ],
-        "risks_or_missing_information": [
-            "Limited verified public data",
-            "Financial and legal information not fully validated"
-        ],
-        "suggested_next_actions": [
-            "Verify company registration",
-            "Check reviews and references",
-            "Contact the company directly",
-            "Compare with competitors"
-        ],
-        "confidence_score": random.randint(65, 90)
-    }
+    prompt = f"""
+    Generate a business research report.
 
-    return report
+    Research Type: {data.research_type}
+    Name: {data.name}
+    Website: {data.website_url}
+    Country: {data.country}
+    Industry: {data.industry}
+    Goal: {data.research_goal}
+
+    Return ONLY valid JSON in this format:
+
+    {{
+      "summary": "...",
+      "products_or_services": [],
+      "opportunities": [],
+      "risks_or_missing_information": [],
+      "suggested_next_actions": [],
+      "confidence_score": 0
+    }}
+    """
+
+    response = client.chat.completions.create(
+        model="openrouter/free",
+        messages=[
+            {
+                "role": "system",
+                "content": "You are a professional business research analyst. Return only valid JSON."
+            },
+            {
+                "role": "user",
+                "content": prompt
+            }
+        ],
+        temperature=0.4
+    )
+
+    content = response.choices[0].message.content
+
+    content = content.replace("```json", "").replace("```", "").strip()
+
+    return json.loads(content)
