@@ -1,3 +1,8 @@
+.mobile-menu-btn,
+.sidebar-close,
+.sidebar-overlay {
+  display: none !important;
+}
 @media (max-width: 1000px) {
   .dashboard-layout {
     flex-direction: column;
@@ -150,6 +155,89 @@
 
   .table-actions {
     justify-content: flex-end;
+  }
+}
+.mobile-menu-btn,
+.sidebar-close,
+.sidebar-overlay {
+  display: none;
+}
+
+@media (max-width: 900px) {
+  .dashboard-layout {
+    display: block;
+  }
+
+  .mobile-menu-btn {
+    display: flex !important;
+    position: fixed;
+    top: 18px;
+    left: 18px;
+    z-index: 3000;
+
+    width: 46px;
+    height: 46px;
+
+    align-items: center;
+    justify-content: center;
+
+    border: none;
+    border-radius: 14px;
+    background: #070b33;
+    color: white;
+    font-size: 24px;
+    cursor: pointer;
+  }
+
+  .sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 4000;
+
+    width: 280px;
+    height: 100vh;
+
+    transform: translateX(-110%);
+    transition: transform 0.25s ease;
+
+    padding-top: 70px;
+  }
+
+  .sidebar.open {
+    transform: translateX(0);
+  }
+
+  .sidebar-close {
+   display: flex !important;
+    position: absolute;
+    top: 18px;
+    right: 18px;
+
+    width: 38px;
+    height: 38px;
+
+    align-items: center;
+    justify-content: center;
+
+    border: none;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.15);
+    color: white;
+    font-size: 28px;
+    cursor: pointer;
+  }
+
+  .sidebar-overlay.show {
+    display: block !important;
+    position: fixed;
+    inset: 0;
+    z-index: 3500;
+    background: rgba(15, 23, 42, 0.5);
+  }
+
+  .dashboard-main {
+    padding: 86px 18px 28px;
   }
 }
   
