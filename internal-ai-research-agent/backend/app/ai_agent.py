@@ -5,6 +5,7 @@ from dotenv import load_dotenv
 from openai import OpenAI
 
 load_dotenv()
+
 api_key = os.getenv("OPENROUTER_API_KEY")
 
 if not api_key:
@@ -12,7 +13,7 @@ if not api_key:
 
 client = OpenAI(
     base_url="https://openrouter.ai/api/v1",
-    api_key=os.getenv("OPENROUTER_API_KEY")
+    api_key=api_key
 )
 
 
@@ -28,7 +29,7 @@ def generate_ai_report(data):
     Industry: {data.industry}
     Goal: {data.research_goal}
 
-    Return ONLY valid JSON in this format:
+    Return ONLY valid JSON in this exact format:
 
     {{
       "summary": "...",
@@ -38,6 +39,13 @@ def generate_ai_report(data):
       "suggested_next_actions": [],
       "confidence_score": 0
     }}
+
+    Rules:
+    - Return only JSON
+    - No markdown
+    - No explanations
+    - No code blocks
+    - confidence_score must be between 0 and 100
     """
 
     response = client.chat.completions.create(
@@ -57,6 +65,22 @@ def generate_ai_report(data):
 
     content = response.choices[0].message.content
 
-    content = content.replace("```json", "").replace("```", "").strip()
+    content = content.replace("```json", "")
+    content = content.replace("```", "")
+    content = content.strip()
 
-    return json.loads(content)
+    start = content.find("{")
+    end = content.rfind("}") + 1
+
+    if start == -1 or end == 0:
+        raise ValueError(
+            f"No valid JSON object found in AI response: {content}"
+        )
+
+    json_text = content[start:end]
+
+    json_text = json_text.replace("\n", " ")
+    json_text = json_text.replace("\r", " ")
+    json_text = json_text.replace("\t", " ")
+
+    return json.loads(json_text, strict=False)
