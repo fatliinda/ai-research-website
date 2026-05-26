@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { FiDownload } from "react-icons/fi";
 
 function ReportTable({ reports, search, setSearch }) {
   return (
@@ -25,6 +26,7 @@ function ReportTable({ reports, search, setSearch }) {
               <th>Confidence Score</th>
               <th>Created Date</th>
               <th>View Details</th>
+              <th>Download</th>
             </tr>
           </thead>
 
@@ -58,6 +60,12 @@ function ReportTable({ reports, search, setSearch }) {
                   <Link className="details-btn" to={`/reports/${report.id}`}>
                     View Details
                   </Link>
+                </td>
+                <td>
+                    <a className="download-btn"href={`http://127.0.0.1:8000/api/reports/${report.id}/export/json`}download>
+                    <FiDownload />
+                    Download
+                   </a>
                 </td>
               </tr>
             ))}

@@ -1,0 +1,87 @@
+.stats-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.1fr 1fr;
+  gap: 22px;
+  margin-bottom: 24px;
+}
+
+.stat-card {
+  background: white;
+  border-radius: 18px;
+  padding: 26px;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 12px 30px rgba(15, 23, 42, 0.06);
+}
+
+.stat-card span {
+  font-weight: 700;
+}
+
+.stat-card h2 {
+  font-size: 44px;
+  margin: 26px 0 8px;
+}
+
+.stat-card h2 small {
+  font-size: 20px;
+  color: #64748b;
+}
+
+.stat-card p {
+  color: #64748b;
+  margin: 0;
+}
+
+.stat-card.purple {
+  background: linear-gradient(135deg, #ffffff, #f4f0ff);
+}
+
+.stat-card.blue {
+  background: linear-gradient(135deg, #ffffff, #eff6ff);
+}
+
+.stat-card.green {
+  background: linear-gradient(135deg, #ffffff, #f0fdf4);
+}
+
+.type-list {
+  margin-top: 18px;
+}
+
+.type-list div {
+  display: flex;
+  justify-content: space-between;
+  margin: 10px 0;
+}
+
+.filters-card {
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 18px;
+  box-shadow: 0 12px 30px rgba(15, 23, 42, 0.05);
+
+  padding: 22px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr) auto;
+  gap: 18px;
+  align-items: end;
+  margin-bottom: 24px;
+}
+
+.filter-group label {
+  display: block;
+  font-size: 14px;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.filter-group input,
+.filter-group select,
+.search-input {
+  width: 100%;
+  padding: 13px 14px;
+  border: 1px solid #dbe3ef;
+  border-radius: 10px;
+  outline: none;
+  background: white;
+}

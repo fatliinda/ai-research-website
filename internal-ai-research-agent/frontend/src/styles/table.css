@@ -1,0 +1,109 @@
+.table-card {
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 18px;
+  box-shadow: 0 12px 30px rgba(15, 23, 42, 0.05);
+  overflow: hidden;
+}
+
+.table-header {
+  padding: 22px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.table-header h2 {
+  margin: 0;
+}
+
+.search-input {
+  max-width: 300px;
+}
+
+.table-wrapper {
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th {
+  text-align: left;
+  padding: 16px 22px;
+  font-size: 13px;
+  background: #f8fafc;
+  color: #334155;
+}
+
+td {
+  padding: 18px 22px;
+  border-top: 1px solid #e5e7eb;
+  font-size: 14px;
+}
+
+.name-cell {
+  font-weight: 800;
+}
+
+.badge {
+  padding: 7px 12px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.badge.company {
+  background: #ede9fe;
+  color: #5b21b6;
+}
+
+.badge.supplier {
+  background: #dbeafe;
+  color: #1d4ed8;
+}
+
+.badge.competitor {
+  background: #ccfbf1;
+  color: #0f766e;
+}
+
+.badge.product {
+  background: #fef3c7;
+  color: #b45309;
+}
+
+.badge.client {
+  background: #fce7f3;
+  color: #be185d;
+}
+
+.confidence {
+  min-width: 120px;
+}
+
+.confidence strong {
+  color: #16a34a;
+}
+
+.confidence-bar {
+  margin-top: 8px;
+  height: 5px;
+  background: #e5e7eb;
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.confidence-bar span {
+  display: block;
+  height: 100%;
+  background: #22c55e;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 40px;
+  color: #64748b;
+}

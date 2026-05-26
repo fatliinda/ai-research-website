@@ -1,0 +1,28 @@
+{
+    "id": 6,
+    "research_type": "Product",
+    "name": "Nike",
+    "website_url": "https://nike.com",
+    "country": "Germany",
+    "industry": "Clothing",
+    "research_goal": "Evaluate Nike as a product and quality",
+    "summary": "Nike excels in athletic apparel with high-quality products and strong market presence.",
+    "products_or_services": [
+        "Nike shoes",
+        "Nike apparel",
+        "Nike accessories"
+    ],
+    "opportunities": [
+        "Expand global reach",
+        "Enhance sustainability initiatives"
+    ],
+    "risks_or_missing_information": [
+        "Competitive market pressures"
+    ],
+    "suggested_next_actions": [
+        "Conduct deeper market analysis",
+        "Monitor competitor performance"
+    ],
+    "confidence_score": 100,
+    "created_at": "2026-05-26 10:07:48.437832+02:00"
+}
